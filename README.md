@@ -37,6 +37,7 @@ in any way, you must credit me.**</ins>
    virtual environment. Don't know what that is? Google it.
 
 3. Launch the game, and control it using the script's GUI.
+
 ### Trivia
 -  This bot is completely visual! It does not hook into The Loopler <br>
    in any way. It ustilises 2 different types of computer vision, <br>
@@ -69,13 +70,16 @@ interesting unicode characters used:
 
 ### Troubleshooting
 **Check the GUI's built in help messages before referring here or to me**
-<details> <summary> Sir Loopalot does not start, or does not do anything <summary><br>
+<details>
+<summary> Sir Loopalot does not start, or does not do anything </summary><br>
 First, check the GUI for known errors. If nothing is displayed there or <br>
 you cannot access the GUI, check the log file that was created in <br> 
 LOOPALOT/LOGS/ If one one was not created, please refer to the bottom <br>
 of this README.
+</details>
 
-## CONTACT
+---
+### CONTACT
 **If you must contact me for any reason, such as troubleshooting help <br>
 contact me here:**
 ***riamtyn.dev@gmail.com***
