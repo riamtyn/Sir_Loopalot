@@ -4,15 +4,21 @@ import pywinctl
 import time as t
 import numpy as np
 from mss import MSS
+from utils import err, succ, warn
 
 # startup
 loopler_focused = False
 debug = False
 t.sleep(3)
 
-all_windows = pywinctl.getAllTitles()
-if debug:
-    print(f"all active windows: {all_windows}")
+try:
+    all_windows = pywinctl.getAllTitles()
+    if debug:
+        print(f"all active windows: {all_windows}")
+except Exception as e: 
+    err('pywinctl bad permissions')
+    print(f'An error has occured. if you see this, it is likely that you are on wayland on linux. this script only works with x11. please switch.')
+    exit()
 
 if not "The Loopler Demo" in all_windows:
     print('the loopler is not open!')
