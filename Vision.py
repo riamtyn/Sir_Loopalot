@@ -6,8 +6,15 @@ from mss import MSS
 import cv2
 import numpy as np
 import pywinctl
+from utils import err, succ, warn
 
-aw = pywinctl.getActiveWindow()
+
+try:
+    aw = pywinctl.getActiveWindow()
+except Exception as e:
+    err('pywinctl bad permissions')
+    print(f'an error has occured. if you see this, it is likely that you are on wayland on linux. this script only works with x11. please switch.')
+    exit()
 
 def FindMoney():
     DigitTemplates = {}
