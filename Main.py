@@ -4,25 +4,24 @@ import pywinctl
 import time as t
 import numpy as np
 from mss import MSS
-from utils import err, succ, warn
+from utils import err, succ, warn, debug
 
 # startup
 loopler_focused = False
-debug = False
-t.sleep(3)
+DEBUG = False
+t.sleep(.5)
+
 
 try:
     all_windows = pywinctl.getAllTitles()
-    if debug:
-        print(f"all active windows: {all_windows}")
+    if DEBUG:
+        debug(f"all window titles: {all_windows}")
 except Exception as e: 
-    err('pywinctl bad permissions')
-    print(f'An error has occured. if you see this, it is likely that you are on wayland on linux. this script only works with x11. please switch.')
+    err('pywinctl permissions','This script only works on X11 due to permissions')
     exit()
 
 if not "The Loopler Demo" in all_windows:
-    print('the loopler is not open!')
-    exit()
+    warn('Window not found','The Loopler Demo is not detected to be open')
 
 if pywinctl.getActiveWindow() != "The Loopler Demo":
     try:
@@ -34,19 +33,15 @@ if pywinctl.getActiveWindow() != "The Loopler Demo":
             window.maximize()
             t.sleep(.333)
             loopler_focused = True
-            if debug:
-                print("try/execept reached end of try successfully")
-
+            succ('The Loopler window focused') 
     except Exception as e:
-        print(f"Exception error, is loopler open? exception: {e}")
-        if debug:
-            print("try/except reached end with exception successfully")
-        exit()
+        warn('Could not focus The loopler','The script may still work, using the focused window.')
+        
         
 active_window = pywinctl.getActiveWindow()
 active_window_name = pywinctl.getActiveWindowTitle()
 
-if debug:
+if DEBUG:
     print(active_window, active_window_name)
 
 if loopler_focused == True:
@@ -57,7 +52,7 @@ if loopler_focused == True:
             'width' : active_window.width, 
             'height' : active_window.height}
         Screenshot = sct.grab(ScreenshotRegion)
-        if debug:
+        if DEBUG:
             print('mss screenshot successfull')
             print(Screenshot)
 #        foo = np.array(Screenshot)
